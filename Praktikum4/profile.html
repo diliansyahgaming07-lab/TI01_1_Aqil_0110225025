@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Aqila Diliansyah Putra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f8f9fa;
+    }
+    header, section, footer {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 150px;
+      border-radius: 10px;
+    }
+    .biodata p {
+      margin: 4px 0;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .gallery img {
+      width: 400px;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .video {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .download a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .download a:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        margin: 20px;
+      }
+      .gallery img {
+        width: 100%;
+      }
+      iframe {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Profile Aqila Diliansyah Putra</h1>
+    <img src="aqilml.jpg" alt="Foto Aqil">
+  </header>
+
+  <section class="biodata">
+    <h2>Biodata Lengkap</h2>
+    <p><strong>Alamat:</strong> Depok, Jawa Barat</p>
+    <p><strong>Email:</strong> diliansyahgaming07@gmail.com</p>
+    <p><strong>Telepon:</strong> 085717912275</p>
+  </section>
+
+  <section class="deskripsi">
+    <h2>Tentang Saya</h2>
+    <p>Saya adalah mahasiswa STT-NF yang tertarik pada bidang web development dan desain UI/UX. Saya suka membuat aplikasi berbasis web dengan tampilan yang menarik dan fungsional.</p>
+    <p>Saya menguasai bahasa pemrograman <strong>HTML</strong>, <strong>PHP</strong>, dan <strong>JavaScript</strong>, serta berpengalaman menggunakan framework <strong>Laravel</strong>, <strong>Next.js</strong>, dan <strong>NestJS</strong> untuk pengembangan aplikasi berbasis web modern. Selain itu, saya juga senang mempelajari teknologi baru untuk meningkatkan kemampuan saya di bidang ini.</p>
+  </section>
+
+  <section class="multimedia">
+    <h2>Koleksi Multimedia</h2>
+    <div class="video">
+      <iframe width="400" height="225"
+        src="ops.mp4"
+        title="Video Profil Aqil"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="gallery">
+      <img src="mk.jpg" alt="Galeri 1">
+      <img src="vc.jpg" alt="Galeri 2">
+      <img src="ghd.jpg" alt="Galeri 3">
+    </div>
+  </section>
+
+  <section class="download">
+    <h2>Download File</h2>
+    <a href="https://www.canva.com/design/DAGLvu10ntM/VufN4DBE7I8lNfGhPpvk4w/edit?utm_content=DAGLvu10ntM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">
+      📄 Buka atau Download CV di Canva
+    </a>
+  </section>
+
+  <footer>
+    <p>© 2025 Aqila Diliansyah Putra</p>
+  </footer>
+
+</body>
+</html>
