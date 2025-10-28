@@ -1,0 +1,115 @@
+/* 🌿 Style Umum Halaman */
+body {
+    background-color: #f5f5dc; /* krem muda */
+    font-family: 'Lucida Sans', Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🟨 Header */
+#header {
+    background-color: #ffeb99;
+    border: 2px solid orange;
+    text-align: center;
+    padding: 10px;
+}
+
+#header h1 {
+    color: blueviolet;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+blockquote {
+    background-color: #ffcc00;
+    font-style: italic;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#soekarno {
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 🔗 Menu Navigasi */
+ul {
+    list-style-type: none;
+    background-color: #fff8e1;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+}
+
+ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    color: darkorange;
+}
+
+/* 🐦 Gambar */
+.gambar, .koleksi {
+    text-align: center;
+    background-color: #fef9e7;
+    padding: 15px;
+}
+
+.gambar img, .koleksi img {
+    width: 200px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+/* 📄 Isi Paragraf */
+.isi {
+    padding: 15px 40px;
+    text-align: justify;
+}
+
+.jawa {
+    font-weight: bold;
+    color: darkgreen;
+}
+
+/* 📘 Bagian Profil dan Budidaya */
+#profil, #beternak {
+    padding: 15px 40px;
+    background-color: #fff8e1;
+}
+
+#profil h3, #beternak h3 {
+    color: darkblue;
+    border-bottom: 2px solid goldenrod;
+}
+
+/* 💰 Promo Section */
+.promo {
+    background-color: #ffecb3;
+    text-align: center;
+    padding: 20px;
+    border-top: 3px solid orange;
+}
+
+.promo h2 {
+    color: darkred;
+}
+
+.promo h3 strong {
+    color: green;
+}
+
+#Wa {
+    color: blue;
+    font-weight: bold;
+}
