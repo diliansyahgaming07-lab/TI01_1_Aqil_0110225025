@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Seminar Tugas Akhir - SISTA</title>
+    
+    <link rel="stylesheet" href="sista.css">
+</head>
+
+<body>
+    <h2>Sistem Informasi Seminar Tugas Akhir - SISTA</h2>
+
+    <div class="breadcrumb">
+        <a href="#">Home</a> > <a href="#">Jadwal</a> > <a href="#">Detail Jadwal</a> > Daftar Peserta
+    </div>
+
+    <div class="info">
+        <p>Mahasiswa Seminar : Diego Armando (0102002)</p>
+        <p>Judul : Rancang Bangun Aplikasi Seminar Tugas Akhir Berbasis Web Menggunakan MVC Framework</p>
+        <p>Waktu : Senin, 4 Januari 2021, 10:00</p>
+    </div>
+
+    <div class="form-box">
+        <h4>Form Peserta Seminar</h4>
+        <form>
+            <label for="nim">NIM :</label>
+            <input type="text" id="nim" name="nim"><br>
+
+            <label for="nama">Nama :</label>
+            <input type="text" id="nama" name="nama"><br>
+
+            <label for="prodi">Prodi :</label>
+            <select id="prodi" name="prodi">
+                <option>Sistem Informasi</option>
+                <option>Teknik Informatika</option>
+                <option>Bisnis Digital</option>
+            </select><br>
+
+            <label>Program :</label>
+            <input type="radio" name="program" value="D3"> D3
+            <input type="radio" name="program" value="S1Reg"> S1 Reguler
+            <input type="radio" name="program" value="S1Fast"> S1 Fast Track
+            <input type="radio" name="program" value="S2"> S2
+            <br>
+
+            <button type="submit">Daftar</button>
+        </form>
+    </div>
+</body>
+</html>
