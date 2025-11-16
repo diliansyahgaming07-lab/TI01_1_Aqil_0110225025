@@ -1,0 +1,35 @@
+.container {
+    width: 700px;
+    margin: 30px auto;
+}
+
+.top {
+    height: 80px;
+    background: #b6e388;
+    margin-bottom: 15px;
+}
+
+.middle {
+    display: flex;
+    gap: 15px;
+}
+
+.left, .center, .right {
+    height: 250px;
+    border-radius: 5px;
+}
+
+.left {
+    width: 120px;
+    background: #ffee6d;
+}
+
+.center {
+    flex: 1;
+    background: #ff6f3c;
+}
+
+.right {
+    width: 200px;
+    background: #49c6e5;
+}
