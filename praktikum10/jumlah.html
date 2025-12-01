@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Penjumlahan Dua Bilangan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Penjumlahan Dua Bilangan</h2>
+
+<div class="container">
+  Bilangan 1:
+  <input type="number" id="a" onchange="hitung()">
+
+  Bilangan 2:
+  <input type="number" id="b" onchange="hitung()">
+
+  <div class="result">
+    Hasil: <span id="hasil"></span>
+  </div>
+</div>
+
+<script>
+  function hitung(){
+    let a = parseFloat(document.getElementById("a").value);
+    let b = parseFloat(document.getElementById("b").value);
+
+    document.getElementById("hasil").innerHTML = a + b;
+  }
+</script>
+
+</body>
+</html>

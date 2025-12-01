@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kurs Rupiah ke Dollar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Kurs Rupiah ke Dollar</h2>
+
+<div class="container">
+  Masukkan Rupiah:
+  <input type="number" id="rp" onkeyup="hitung()">
+
+  <div class="result">
+    Dollar: <span id="hasil"></span>
+  </div>
+</div>
+
+<script>
+  function hitung(){
+    let rp = document.getElementById("rp").value;
+    let kurs = 14650;
+    let dolar = rp / kurs;
+
+    document.getElementById("hasil").innerHTML = dolar.toFixed(2);
+  }
+</script>
+
+</body>
+</html>

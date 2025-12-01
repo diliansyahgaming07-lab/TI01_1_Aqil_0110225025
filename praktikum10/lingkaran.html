@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menghitung Lingkaran</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Menghitung Luas & Keliling Lingkaran</h2>
+
+<div class="container">
+  Jari-jari:
+  <input type="number" id="r" onkeyup="hitung()">
+
+  <div class="result">
+    Luas: <span id="luas"></span><br>
+    Keliling: <span id="keliling"></span>
+  </div>
+</div>
+
+<script>
+  function hitung(){
+    let r = document.getElementById("r").value;
+    let luas = 3.14 * r * r;
+    let kel = 2 * 3.14 * r;
+
+    document.getElementById("luas").innerHTML = luas;
+    document.getElementById("keliling").innerHTML = kel;
+  }
+</script>
+
+</body>
+</html>
