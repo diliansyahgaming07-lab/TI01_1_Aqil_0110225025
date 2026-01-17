@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if action == 'create' %}Tambah{% else %}Edit{% endif %} Produk - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-admin {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.15);
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139,69,19,0.3);
+            color: white;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark navbar-admin">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'adminpanel:products_list' %}">
+                <i class="bi bi-arrow-left-circle fs-3 me-3"></i>
+                <div>
+                    <div class="fw-bold">Kembali ke Daftar Produk</div>
+                    <small class="opacity-75">{% if action == 'create' %}Tambah Produk Baru{% else %}Edit Produk{% endif %}</small>
+                </div>
+            </a>
+            <a href="{% url 'adminpanel:logout' %}" class="btn btn-light">
+                <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-card">
+            <div class="text-center mb-4">
+                <div class="mb-3">
+                    <i class="bi bi-box-seam fs-1" style="color: var(--primary-color);"></i>
+                </div>
+                <h2 class="fw-bold" style="color: var(--primary-color);">
+                    {% if action == 'create' %}
+                        <i class="bi bi-plus-circle me-2"></i>Tambah Produk Baru
+                    {% else %}
+                        <i class="bi bi-pencil-square me-2"></i>Edit Produk
+                    {% endif %}
+                </h2>
+                <p class="text-muted">Lengkapi form di bawah untuk {% if action == 'create' %}menambahkan{% else %}mengupdate{% endif %} produk</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="bi bi-tag me-2"></i>Nama Produk
+                    </label>
+                    <input type="text" name="name" class="form-control" 
+                           placeholder="Contoh: Sofa Minimalis Modern" 
+                           value="{% if product %}{{ product.name }}{% endif %}" required>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="bi bi-currency-dollar me-2"></i>Harga (Rp)
+                        </label>
+                        <input type="number" name="price" class="form-control" 
+                               placeholder="Contoh: 4500000" 
+                               value="{% if product %}{{ product.price }}{% endif %}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="bi bi-grid me-2"></i>Kategori
+                        </label>
+                        <select name="category" class="form-select" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Sofa" {% if product.category == 'Sofa' %}selected{% endif %}>Sofa</option>
+                            <option value="Meja" {% if product.category == 'Meja' %}selected{% endif %}>Meja</option>
+                            <option value="Kursi" {% if product.category == 'Kursi' %}selected{% endif %}>Kursi</option>
+                            <option value="Lemari" {% if product.category == 'Lemari' %}selected{% endif %}>Lemari</option>
+                            <option value="Rak" {% if product.category == 'Rak' %}selected{% endif %}>Rak</option>
+                            <option value="Tempat Tidur" {% if product.category == 'Tempat Tidur' %}selected{% endif %}>Tempat Tidur</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="bi bi-file-text me-2"></i>Deskripsi
+                    </label>
+                    <textarea name="description" class="form-control" rows="4" 
+                              placeholder="Masukkan deskripsi produk secara detail" required>{% if product %}{{ product.description }}{% endif %}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">
+                        <i class="bi bi-image me-2"></i>URL Gambar
+                    </label>
+                    <input type="url" name="image" id="imageUrl" class="form-control" 
+                           placeholder="https://example.com/image.jpg" 
+                           value="{% if product %}{{ product.image }}{% endif %}" 
+                           onchange="previewImage()" required>
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Gunakan link gambar dari Unsplash atau sumber lain
+                    </small>
+                    <img id="imagePreview" class="image-preview" alt="Preview">
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="bi bi-check-circle me-2"></i>
+                        {% if action == 'create' %}Simpan Produk{% else %}Update Produk{% endif %}
+                    </button>
+                    <a href="{% url 'adminpanel:products_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle me-2"></i>Batal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function previewImage() {
+            const url = document.getElementById('imageUrl').value;
+            const preview = document.getElementById('imagePreview');
+            
+            if (url) {
+                preview.src = url;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+
+        // Preview on page load if editing
+        window.addEventListener('DOMContentLoaded', function() {
+            previewImage();
+        });
+    </script>
+</body>
+</html>

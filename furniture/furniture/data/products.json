@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Sofa Minimalis Modern",
+    "price": 4500000,
+    "description": "Sofa 3 dudukan dengan bahan berkualitas tinggi, desain minimalis cocok untuk ruang tamu modern",
+    "category": "Sofa",
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500"
+  },
+  {
+    "id": 2,
+    "name": "Meja Makan Kayu Jati",
+    "price": 6800000,
+    "description": "Meja makan kayu jati solid untuk 6 orang, tahan lama dan elegan",
+    "category": "Meja",
+    "image": "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500"
+  },
+  {
+    "id": 3,
+    "name": "Lemari Pakaian 3 Pintu",
+    "price": 3200000,
+    "description": "Lemari pakaian dengan 3 pintu sliding, dilengkapi cermin dan banyak ruang penyimpanan",
+    "category": "Lemari",
+    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500"
+  },
+  {
+    "id": 4,
+    "name": "Kursi Kerja Ergonomis",
+    "price": 1500000,
+    "description": "Kursi kerja dengan sandaran punggung ergonomis, cocok untuk bekerja seharian",
+    "category": "Kursi",
+    "image": "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=500"
+  },
+  {
+    "id": 5,
+    "name": "Rak Buku Minimalis",
+    "price": 1800000,
+    "description": "Rak buku 5 tingkat dengan desain minimalis, hemat tempat",
+    "category": "Rak",
+    "image": "https://images.unsplash.com/photo-1594620302200-9a762244a156?w=500"
+  },
+  {
+    "id": 6,
+    "name": "Tempat Tidur King Size",
+    "price": 8500000,
+    "description": "Tempat tidur king size dengan headboard mewah dan rangka kokoh",
+    "category": "Tempat Tidur",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500"
+  },
+  {
+    "id": 7,
+    "name": "angga",
+    "price": 12344333,
+    "description": "saffasd",
+    "category": "Lemari",
+    "image": "https://png.pngtree.com/background/20250121/original/pngtree-front-view-rendering-of-individual-vintage-wooden-sofa-seat-picture-image_13382554.jpg"
+  },
+  {
+    "id": 8,
+    "name": "kursi kondangan",
+    "price": 2000000,
+    "description": "kursi",
+    "category": "Kursi",
+    "image": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//95/MTA-51346039/no-brand_kursi-makan-kondangan-kursi-rumah-makan-kursi-napolly-101_full01.jpg"
+  },
+  {
+    "id": 9,
+    "name": "kursi kondangan",
+    "price": 6000000,
+    "description": "kursi",
+    "category": "Kursi",
+    "image": "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//95/MTA-51346039/no-brand_kursi-makan-kondangan-kursi-rumah-makan-kursi-napolly-101_full01.jpg"
+  }
+]

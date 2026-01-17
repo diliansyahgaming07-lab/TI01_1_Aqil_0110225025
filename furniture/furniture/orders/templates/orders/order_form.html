@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Pemesanan - {{ product.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <style>
+      :root {
+        --primary-color: #8b4513;
+        --secondary-color: #d2691e;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-container {
+        margin-top: 30px;
+        margin-bottom: 50px;
+      }
+
+      .product-preview {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 100px;
+      }
+
+      .product-image {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-form-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+      }
+
+      .form-control,
+      .form-select {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.15);
+      }
+
+      .btn-submit {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .btn-submit:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
+      }
+
+      .price-display {
+        background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .price-label {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .price-value {
+        color: var(--primary-color);
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .product-badge {
+        background: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+      }
+
+      .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .quantity-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 2px solid var(--primary-color);
+        background: white;
+        color: var(--primary-color);
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .quantity-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      .quantity-input {
+        width: 80px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .order-summary {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 20px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .summary-total {
+        border-top: 2px solid #dee2e6;
+        padding-top: 15px;
+        margin-top: 15px;
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+          <i class="bi bi-house-door-fill fs-3 me-2"></i>
+          <span class="fs-4 fw-bold">FurnitureHub</span>
+        </a>
+        <a href="/" class="btn btn-outline-light"> <i class="bi bi-arrow-left me-2"></i>Kembali ke Home </a>
+      </div>
+    </nav>
+
+    <div class="container order-container">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item"><a href="/#products" class="text-decoration-none">Produk</a></li>
+          <li class="breadcrumb-item active">Form Pemesanan</li>
+        </ol>
+      </nav>
+
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-2"></i>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %} {% endif %}
+
+      <div class="row g-4">
+        <!-- Product Preview -->
+        <div class="col-lg-5">
+          <div class="product-preview">
+            <span class="product-badge">{{ product.category }}</span>
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image" />
+            <h3 class="fw-bold mb-3">{{ product.name }}</h3>
+            <p class="text-muted mb-4">{{ product.description }}</p>
+
+            <div class="price-display">
+              <div class="price-label">Harga Satuan</div>
+              <div class="price-value" id="unitPrice" data-price="{{ product.price }}">Rp {{ product.price|floatformat:0 }}</div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <i class="bi bi-star-fill text-warning"></i>
+              <span class="ms-2 text-muted">(5.0) 150 Ulasan</span>
+            </div>
+
+            <div class="d-flex gap-2">
+              <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Stok Tersedia</span>
+              <span class="badge bg-info"><i class="bi bi-truck me-1"></i>Gratis Ongkir</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Form -->
+        <div class="col-lg-7">
+          <div class="order-form-card">
+            <div class="text-center mb-4">
+              <h2 class="fw-bold" style="color: var(--primary-color)"><i class="bi bi-clipboard-check me-2"></i>Form Pemesanan</h2>
+              <p class="text-muted">Lengkapi data di bawah untuk melanjutkan pemesanan</p>
+            </div>
+            <form method="POST" id="orderForm">
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label"> <i class="bi bi-person me-2"></i>Nama Lengkap </label>
+                  <input type="text" name="customer_name" class="form-control" placeholder="Masukkan nama lengkap" required />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"> <i class="bi bi-telephone me-2"></i>Nomor HP/WhatsApp </label>
+                  <input type="tel" name="phone" class="form-control" placeholder="08xx-xxxx-xxxx" required />
+                </div>
+                <div class="col-12">
+                  <label class="form-label"> <i class="bi bi-geo-alt me-2"></i>Alamat Lengkap </label>
+                  <textarea name="address" class="form-control" rows="3" placeholder="Masukkan alamat lengkap untuk pengiriman" required></textarea>
+                  <small class="text-muted">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Pastikan alamat sudah benar untuk memudahkan pengiriman
+                  </small>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"> <i class="bi bi-box-seam me-2"></i>Jumlah Pesanan </label>
+                  <div class="quantity-control">
+                    <button type="button" class="quantity-btn" onclick="decreaseQty()">
+                      <i class="bi bi-dash"></i>
+                    </button>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="99" class="form-control quantity-input" required onchange="updateTotal()" />
+                    <button type="button" class="quantity-btn" onclick="increaseQty()">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"> <i class="bi bi-credit-card me-2"></i>Metode Pembayaran </label>
+                  <select class="form-select">
+                    <option selected>Transfer Bank</option>
+                    <option>COD (Bayar di Tempat)</option>
+                    <option>Kartu Kredit</option>
+                    <option>E-Wallet</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Order Summary -->
+              <div class="order-summary">
+                <h5 class="fw-bold mb-3"><i class="bi bi-receipt me-2"></i>Ringkasan Pesanan</h5>
+                <div class="summary-row">
+                  <span>Harga Satuan:</span>
+                  <span class="fw-bold" id="displayUnitPrice">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                  <span>Jumlah:</span>
+                  <span class="fw-bold" id="displayQty">1</span>
+                </div>
+                <div class="summary-row">
+                  <span>Ongkos Kirim:</span>
+                  <span class="fw-bold text-success">GRATIS</span>
+                </div>
+                <div class="summary-row summary-total">
+                  <span>Total Pembayaran:</span>
+                  <span style="color: var(--primary-color)" id="totalPrice">Rp 0</span>
+                </div>
+              </div>
+              <div class="form-check mt-4">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" required />
+                <label class="form-check-label" for="agreeTerms"> Saya setuju dengan <a href="#" class="text-decoration-none">syarat dan ketentuan</a> yang berlaku </label>
+              </div>
+              <button type="submit" class="btn btn-submit mt-4"><i class="bi bi-bag-check me-2"></i>Konfirmasi Pesanan</button>
+              <div class="text-center mt-3">
+                <small class="text-muted">
+                  <i class="bi bi-shield-check me-1"></i>
+                  Transaksi Anda aman dan terlindungi
+                </small>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Format Rupiah Function
+      function formatRupiah(angka) {
+        return "Rp " + parseInt(angka).toLocaleString("id-ID");
+      } // Get unit price
+      const unitPrice = parseInt(document.getElementById("unitPrice").dataset.price); // Update display on page load
+      document.getElementById("displayUnitPrice").textContent = formatRupiah(unitPrice);
+      updateTotal();
+      function updateTotal() {
+        const qty = parseInt(document.getElementById("quantity").value) || 1;
+        const total = unitPrice * qty;
+        document.getElementById("displayQty").textContent = qty + " unit";
+        document.getElementById("totalPrice").textContent = formatRupiah(total);
+      }
+      function increaseQty() {
+        const qtyInput = document.getElementById("quantity");
+        let currentQty = parseInt(qtyInput.value);
+        if (currentQty < 99) {
+          qtyInput.value = currentQty + 1;
+          updateTotal();
+        }
+      }
+      function decreaseQty() {
+        const qtyInput = document.getElementById("quantity");
+        let currentQty = parseInt(qtyInput.value);
+        if (currentQty > 1) {
+          qtyInput.value = currentQty - 1;
+          updateTotal();
+        }
+      } // Form validation
+      document.getElementById("orderForm").addEventListener("submit", function (e) {
+        if (!document.getElementById("agreeTerms").checked) {
+          e.preventDefault();
+          alert("Harap setujui syarat dan ketentuan terlebih dahulu");
+        }
+      });
+    </script>
+  </body>
+</html>

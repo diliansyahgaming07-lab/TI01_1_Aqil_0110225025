@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Produk - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <style>
+      :root {
+        --primary-color: #8b4513;
+        --secondary-color: #d2691e;
+      }
+
+      body {
+        background: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .sidebar {
+        background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        min-height: 100vh;
+        padding: 0;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .sidebar-header {
+        padding: 25px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-menu {
+        list-style: none;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .sidebar-menu li a {
+        display: block;
+        padding: 15px 25px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-menu li a:hover,
+      .sidebar-menu li a.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding-left: 30px;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 30px;
+      }
+
+      .top-navbar {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .product-img {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .btn-create {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border: none;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .btn-create:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 0;
+          transform: translateX(-100%);
+          transition: all 0.3s ease;
+        }
+
+        .sidebar.show {
+          width: 250px;
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h4 class="text-white fw-bold mb-0"><i class="bi bi-house-door-fill me-2"></i>FurnitureHub</h4>
+        <small class="text-white-50">Admin Panel</small>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="{% url 'adminpanel:dashboard' %}"> <i class="bi bi-speedometer2 me-2"></i>Dashboard </a>
+        </li>
+        <li>
+          <a href="{% url 'adminpanel:orders_list' %}"> <i class="bi bi-cart-check me-2"></i>Pesanan </a>
+        </li>
+        <li>
+          <a href="{% url 'adminpanel:products_list' %}" class="active"> <i class="bi bi-box-seam me-2"></i>Produk </a>
+        </li>
+        <li>
+          <a href="/"> <i class="bi bi-globe me-2"></i>Lihat Website </a>
+        </li>
+        <li>
+          <a href="{% url 'adminpanel:logout' %}"> <i class="bi bi-box-arrow-right me-2"></i>Logout </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navbar -->
+      <div class="top-navbar d-flex justify-content-between align-items-center">
+        <div>
+          <button class="btn btn-outline-secondary d-md-none" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+          </button>
+          <h4 class="mb-0 fw-bold d-inline-block ms-2" style="color: var(--primary-color)">Kelola Produk</h4>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <a href="{% url 'adminpanel:product_create' %}" class="btn btn-create"> <i class="bi bi-plus-circle me-1"></i>Tambah Produk </a>
+          <a href="{% url 'adminpanel:logout' %}" class="btn btn-danger btn-sm"> <i class="bi bi-box-arrow-right me-1"></i>Logout </a>
+        </div>
+      </div>
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-2"></i>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %} {% endif %}
+      <!-- Products Grid -->
+      <div class="row g-4">
+        {% for product in products %}
+        <div class="col-md-6 col-lg-4">
+          <div class="product-card">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-img" />
+            <div class="card-body">
+              <span class="badge bg-secondary mb-2">{{ product.category }}</span>
+              <h5 class="card-title fw-bold">{{ product.name }}</h5>
+              <p class="card-text text-muted small">{{ product.description|truncatewords:15 }}</p>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fs-5 fw-bold" style="color: var(--primary-color)">
+                  <span class="price-value" data-price="{{ product.price }}"> Rp {{ product.price|floatformat:0 }} </span>
+                </span>
+              </div>
+              <div class="d-flex gap-2">
+                <a href="{% url 'adminpanel:product_edit' product.id %}" class="btn btn-warning btn-sm flex-fill"> <i class="bi bi-pencil me-1"></i>Edit </a>
+                <button type="button" class="btn btn-danger btn-sm flex-fill" onclick="confirmDelete({{ product.id }})"><i class="bi bi-trash me-1"></i>Hapus</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+          <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
+          <p class="text-muted mb-3">Belum ada produk</p>
+          <a href="{% url 'adminpanel:product_create' %}" class="btn btn-create"> <i class="bi bi-plus-circle me-1"></i>Tambah Produk Pertama </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="bi bi-exclamation-triangle text-danger me-2"></i>Konfirmasi Hapus</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <a href="#" id="deleteLink" class="btn btn-danger"> <i class="bi bi-trash me-1"></i>Hapus </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Format Rupiah
+      document.addEventListener("DOMContentLoaded", function () {
+        const prices = document.querySelectorAll(".price-value");
+        prices.forEach((price) => {
+          const value = price.dataset.price;
+          price.textContent = "Rp " + parseInt(value).toLocaleString("id-ID");
+        });
+      }); // Toggle Sidebar
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("show");
+      } // Confirm Delete
+      function confirmDelete(productId) {
+        const deleteLink = document.getElementById("deleteLink");
+        deleteLink.href = `/adminpanel/products/${productId}/delete/`;
+        const modal = new bootstrap.Modal(document.getElementById("deleteModal"));
+        modal.show();
+      }
+    </script>
+  </body>
+</html>
